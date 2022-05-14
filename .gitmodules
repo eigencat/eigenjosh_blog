@@ -1,0 +1,9 @@
+[submodule "eigenjosh/themesloveit"]
+	path = eigenjosh/themesloveit
+	url = https://github.com/dillonzq/LoveIt.git
+[submodule "eigenjosh/themes/themes/loveit"]
+	path = eigenjosh/themes/themes/loveit
+	url = https://github.com/dillonzq/LoveIt.git
+[submodule "eigenjosh/themes/loveit"]
+	path = eigenjosh/themes/loveit
+	url = https://github.com/dillonzq/LoveIt.git
