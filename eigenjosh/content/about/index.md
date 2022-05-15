@@ -1,1 +1,3 @@
-I'm a software engineer with a background in math. I'm interested in math-heavy problems including but not limited to cryptography, probabilistic models, quantum computing, and algorithm design.
+I'm a software engineer interested in math-heavy problems including but not limited to cryptography, probabilistic models, quantum computing, and algorithm design. I'm also intrigued by sound engineering, digital compression, astrophysics, philosophy, and film.
+
+I'll be using this blog to write about those topics and more. In most cases, I write about a topic in order to help myself learn it. As such, my posts may contain inaccuracies and shouldn't be taken as a source of truth!
