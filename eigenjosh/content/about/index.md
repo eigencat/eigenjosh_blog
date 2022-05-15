@@ -1,0 +1,1 @@
+I'm a software engineer with a background in math. I'm interested in math-heavy problems including but not limited to cryptography, probabilistic models, quantum computing, and algorithm design.
