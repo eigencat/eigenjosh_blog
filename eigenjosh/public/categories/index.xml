@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Categories - Category - The Eigenspace</title>
+        <link>http://eigenjosh.com/categories/</link>
+        <description>Categories - Category - The Eigenspace</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 13 May 2022 13:43:39 -0700</lastBuildDate><atom:link href="http://eigenjosh.com/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>meta</title>
+    <link>http://eigenjosh.com/categories/meta/</link>
+    <pubDate>Fri, 13 May 2022 13:43:39 -0700</pubDate>
+    <author>Josh Miller</author>
+    <guid>http://eigenjosh.com/categories/meta/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

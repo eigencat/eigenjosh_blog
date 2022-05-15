@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>meta - Category - The Eigenspace</title>
+        <link>http://eigenjosh.com/categories/meta/</link>
+        <description>meta - Category - The Eigenspace</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 13 May 2022 13:43:39 -0700</lastBuildDate><atom:link href="http://eigenjosh.com/categories/meta/" rel="self" type="application/rss+xml" /><item>
+    <title>Hello World</title>
+    <link>http://eigenjosh.com/posts/helloworld/</link>
+    <pubDate>Fri, 13 May 2022 13:43:39 -0700</pubDate>
+    <author>Josh Miller</author>
+    <guid>http://eigenjosh.com/posts/helloworld/</guid>
+    <description><![CDATA[As I&rsquo;m sure you all know, it&rsquo;s illegal to start a dev blog without titling the first post &ldquo;Hello World.&rdquo; So here I am to pay my dues.
+This is the first of (hopefully) many posts where I&rsquo;ll explore a variety of topics, mostly in the intersection of math and computer science. I&rsquo;ve found that writing about a topic is a powerful way to improve my understanding of it, and I intend to use this blog to take full advantage of that fact.]]></description>
+</item>
+</channel>
+</rss>
