@@ -19,15 +19,13 @@ This approximation becomes even simpler if we're interested in the logarithm of 
 When $N$ is large, the last two terms become very small in relation to the final answer, so they're often omitted and the approximation becomes
 \\[ \ln N! \approx N\ln N - N. \\]
 
-Given that this is an approximation, it is essential to understand what the error bounds are. This is tricky to summarize before we've seen the derivation of the approximation (see below!), but for now I'll say that the error in the factorial approximation is asymptotically equal to a multiplicative factor of $1 + \frac{1}{12N}$. For this reason, you'll often see the error denoted as $O(1/N)$ and included in the statement of the approximation in order to turn it into an "equality:"
+Given that this is an approximation, it is essential to understand how accurate it is or is not. This is tricky to summarize before we've seen the derivation of the approximation (see below!), but for now I'll say that the error in the factorial approximation is asymptotically equal to a multiplicative factor of $1 + \frac{1}{12N}$. For this reason, you'll often see the error denoted as $O(1/N)$ and included in the statement of the approximation in order to turn it into an "equality:"
 \\[ N! = \left(\frac{N}{e}\right)^N\sqrt{2\pi N} \left(1 + O\left(\frac{1}{N}\right)\right). \\]
 
-Now let's return to our task of calculating $10^{23}!$. 
-
 ## Stirling's Approximation of the Gamma Function
-The **Gamma function** $\Gamma(z)$ is a well-known extension of the factorial function which operates on complex and real numbers, not just the non-negative integers. For those unfamiliar with this function, it's defined as
+The **Gamma function** $\Gamma(z)$ is a well-known extension of the factorial function. As an extension, it operates on complex and real numbers rather than being limited to the natural numbers as factorial is. For those unfamiliar with this function, it's defined as
 \\[ \Gamma(z) = \int_0^{\infty}x^{z-1}e^{-x} \mathrm{d}x \\]
-for $z\in\mathbb{C}$ where $\Re(z) > 0$. This simplifies nicely when the function's input is a positive integer. Given $n > 0 \in\mathbb{Z}$, we find
+for $z\in\mathbb{C}$ where $\Re(z) \gt 0$. This simplifies nicely when the function's input is a positive integer. Given $n \in\mathbb{N}$, we find
 \\[ \Gamma(n) = (n-1)! \\]
 Note: this result will become more clear in the section on derivation.
 
@@ -41,9 +39,9 @@ Just like before, the $z$ and constant terms become negligable for large $z$, so
 \\[ \ln\Gamma(z) \approx \left(z-\frac{1}{2}\right)\ln z. \\]
 
 ## Derivation
-How do we go about proving that Stirling's approximation is an approximation of factorial? The derivation of this approximation begins with the integral of $e^x$. Recall that
-\\[ \int e^{-x} \mathrm{d}x = -e^{-x} + C. \\]
-If we scale the exponent, this relationship becomes
+How do we go about proving that Stirling's approximation is an approximation of factorial? There are a few approaches, but I'd like to walk through a derivation that begins with the integral of $e^x$. Recall that
+\\[ \int e^{-x} \mathrm{d}x = -e^{-x} + C, \\]
+and that when we scale the exponent by another variable $a$ this relationship becomes
 \\[ \int e^{-ax} \mathrm{d}x = -\frac{1}{a}e^{-ax} + C. \\]
 If we turn this into a definite integral from $0$ to $\infty$, we'll find that
 \\[ \int_0^\infty e^{-ax} \mathrm{d}x = a^{-1}. \\]
@@ -53,5 +51,61 @@ and we've managed to introduce a factorial into this expression! By setting $a=1
 \\[ n! = \int_0^\infty x^ne^{-x}\mathrm{d}x. \\]
 Does this look familiar? It should! This looks like the definition of the **gamma function**. And indeed, this is why the gamma function is considered an extension of factorial. It simply takes this identity for factorial and uses the integral definition (substituting $n-1$ for $n$ thanks to Legendre's tomfoolery) in order to extend the function outside the non-negative integers.
 
-Now we can use this identity to derive Stirling's approximation. 
+---
 
+Let's take a moment to examine the integrand from the identity above. Geometically the function $x^ne^{-x}$ is somewhat reminiscent of a Gaussian function. Indeed, we can find a Gaussian that's a pretty good approximation of it. Below is a graph comparing it to a Gaussian that we'll derive in a moment. Note how the two curves share the following properties:
+1. Both curves peak at $x=n$
+2. The height of that peak in both is $n^ne^{-n}$
+
+Note also how closely the two mirror each other when changing values of $n$ (use the slider!).
+
+{{< desmos kz4yhhvqya 600 >}}
+
+So how did I find the Gaussian plotted above? Recall that Gaussians take the form $e^{-x^2}$, so let's attempt to put our integrand in that form. First note how we can consolidate the integrand into a single exponential:
+\\[ x^ne^{-x} = e^{n\ln x - x}. \\]
+From here, we'll use the Taylor expansion for $\ln x$.
+{{< admonition tip "Recall" true >}}
+Recall that the first few terms of the Taylor expansion for $\ln x$ are
+\\[ \ln x = (x-1) - \frac{(x-1)^2}{2} + \frac{(x-1)^3}{3} - \cdots. \\]
+{{< /admonition >}}
+
+We'll use the first two terms of this expansion together with a convenient variable substitution of $y = x - n$ in order to expand our integrand's exponent as follows
+\begin{align*}
+    n\ln x - x &= n\ln(n+y)-n-y \\\\
+    &= n\ln\left(n\left(1+\frac{y}{n}\right)\right)-n-y \\\\
+    &= n\ln n - n - y + n\underbrace{\ln\left(1+\frac{y}{n}\right)}_{\text{expand by Taylor}} \\\\
+    &\approx n\ln n - n - y + n\left(\frac{y}{n}-\frac{1}{2}\left(\frac{y}{n}\right)^2\right) \\\\
+    &= n\ln n - n -\frac{y^2}{2n}
+\end{align*}
+Now we can reintroduce this as our exponent and find that
+\begin{align*}
+    x^ne^{-x} &\approx e^{n\ln n - n - y^2/(2n)} \\\\
+    &= n^ne^{-n}e^{-y^2/(2n)}
+\end{align*}
+Finally, with this $e^{-y^2/(2n)}$ term, we have reached the form of a Gaussian! As a final step, let's plug this approximation back into our integral identity for $n!$. When we do this, note that $dy = d(x-n) = dx$, so our change of variables does not introduce any new terms through the differential.
+
+\begin{align*}
+    n! &\approx n^ne^{-n} \int_0^\infty e^{-y^2/(2n)}\mathrm{d}y \\\\
+    &\approx n^ne^{-n} \int_{-\infty}^{\infty} e^{-y^2/(2n)}\mathrm{d}y \\\\
+    &= n^ne^{-n}\sqrt{2\pi n}
+\end{align*}
+And there we have it! Sterling's approximation derived using the integral definition of factorial, the Taylor expansion for a logarithm, and a Gaussian integral.
+
+{{< admonition note "Note" true >}}
+Above I make a change to the limits of the integral when I extend the lower limit from $0$ down to $-\infty$. How did I do this?
+
+Remember we are interested in large values of $n$. Geometrically, let's examine what we can say about the area under the Gaussian for $x \lt 0$ when $n$ is large. To visualize this, see the following plot where our Gaussian and the original function are both normalized to always have an amplitude of 1. By normalizing the functions in this way, we can more easily see them evolve over a wider range of $n$, and we can also gain some perspective about where the majority of the area under the curve lies.
+{{< desmos sh1hfq5fz1 600 >}}
+Even for relatively small $n$ such as 50, we see that the area under the Gaussian when $x\lt0$ is negligible. The vast majority of the area under the curve comes from the local region around the peak of the function, so we can freely expand the limits of the integral without losing much accuracy in our result. Hence why we can extend that lower limit from $0$ to $-\infty$ without compromising the approximation.
+{{< /admonition >}}
+
+## Error Estimation and Stirling's Series
+Given the derivaiton in the previous section, we now have the tools we need in order to estimate the error in Stirling's Approximation.
+
+Recall that we derived the approximation using only the first two terms of the Taylor expandion for $\ln x$. One might conjecture that we can improve the accuracy of the approximation by keeping more terms from that expansion. Furthermore, the _difference_ between the approximation based on 2 terms and the approximation based on more terms is an estimate for our error! Let's walk through the derivation once more, but this time let's keep more terms from the expansion and see what we get.
+
+Starting from the log term we saw in our exponent:
+\begin{align*}
+    \ln\left(1+\frac{y}{n}\right) &\approx unfinished \\\\
+    &= unfinished
+\end{align*}
