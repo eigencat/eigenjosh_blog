@@ -56,7 +56,6 @@ Then we take the square root, leaving us with
 Note how we do not keep the negative square root. This is because $I$ is intrinsically a positive value; it represents the area beneath a positive function. The negative square root would simply have been an irrelevant artifact. For example, suppose I defined $x=1$. Then I squared both sides to find $x^2 = 1$, then took the square root again to get $x = \pm 1$. It would be ridiculous to maintain that $x=-1$ is a valid statement since $x$ is intrinsically positive by definition.
 
 Ok so we've solved my favorite integral! Now we can relate this back to the normal distribution. Suppose we were to introduce a scaling term $a>0$ into the exponent of our integrand. Doing this and then following the same steps would reveal that
-Going through the same logic, we would find
 \\[ \int_{-\infty}^\infty e^{-ax^2} = \sqrt{\frac{\pi}{a}}. \\]
 In the un-normalized normal distribution, we take $a=1/2$, so we find that the normalizing term for the distribution is
 \\[ \sqrt{2\pi}, \\]
