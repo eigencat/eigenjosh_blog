@@ -74,10 +74,10 @@ languageName = "English"
 [params]
   # site default theme ["auto", "light", "dark"]
   # 网站默认主题 ["auto", "light", "dark"]
-  defaultTheme = "auto"
+  defaultTheme = "dark"
   # public git repo url only then enableGitInfo is true
   # 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效
-  gitRepo = ""
+  gitRepo = "https://github.com/eigencat/eigenjosh_blog"
   # which hash function used for SRI, when empty, no SRI is used
   # ["sha256", "sha384", "sha512", "md5"]
   # 哪种哈希函数用来 SRI, 为空时表示不使用 SRI
@@ -91,7 +91,7 @@ languageName = "English"
   title = "The Eigenspace"
   # website description for RSS, SEO, Open Graph and Twitter Cards
   # 网站描述, 用于 RSS, SEO, Open Graph 和 Twitter Cards
-  description = "I'll eventually figure out what to put here"
+  description = "Just another math and cs blog"
   # website images for Open Graph and Twitter Cards
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = []
@@ -270,7 +270,7 @@ languageName = "English"
   # 主页的社交信息设置
   [params.social]
     GitHub = "eigencat"
-    Linkedin = "josh-miller-067391101"
+    Linkedin = "eigenjosh"
     Twitter = ""
     Instagram = ""
     Facebook = ""
