@@ -1,0 +1,10 @@
+<!-- Parameters -->
+<!-- 0. Audio file name (without extension) -->
+<!-- ASSUMES FILE NAME == FREQUENCY IN Hz -->
+<div align="center">
+    <div>{{ index .Params 0 }} Hz:</div>
+    <audio controls>
+        <source src="{{ index .Params 0 }}.wav" type="audio/wav" title="{{ index .Params 0 }} Hz">
+        Your browser does not support the audio element.
+    </audio>
+</div>
