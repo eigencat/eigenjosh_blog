@@ -1,6 +1,6 @@
 ---
 title: "A Brief Introduction to Fourier Series"
-date: 2022-06-04T15:00:00-00:00
+date: 2022-10-17T00:00:00-00:00
 featuredImage: ""
 featuredImagePreview: ""
 description: ""
@@ -8,10 +8,10 @@ toc: true
 tags: [fourier, pdes]
 categories: [math]
 linkToMarkdown: true
-draft: true
+draft: false
 ---
 
-In this post, we'll take the first step towards understanding the Fourier transform and its many applications.
+In this post, we'll take the first step towards understanding the Fourier transform and its many applications. Note: if you're looking to really learn, go watch [3Blue1Brown's video](https://www.youtube.com/watch?v=spUNpyF58BY)! This post is really just an excuse for me to review the topic and make pretty graphs.
 
 <!--more-->
 
@@ -48,12 +48,16 @@ Now suppose I didn't tell you what frequency these samples are. It would be rela
 {{< figure src="sine.svg" title="$\sin(x)$" >}}
 {{< figure src="sine2.svg" title="$\sin(2x)$" >}}
 
-Given these simple curves alone, you can determine the frequency of each. But what if we have something more complicated? What if we had these two waves added together?
-{{< figure src="sine_add.svg" title="$\sin(x) + \sin(2x)$" >}}
+Given these simple curves alone, you can determine the frequency of each. But what if we have something more complicated?
+{{< figure src="sine_add.svg" title="A mystery wave" >}}
 
-This composite wave is still periodic like the individual sine waves, so you could certainly pick out a frequency. But what if we wanted to find out the individual frequencies of the sines that make up this wave? How would you extract that information if you didn't have the formula already?
+This wave is still periodic like the sine waves we saw before, so we could certainly pick out a frequency. But what if I told you that this wave is actually a composite wave made by combining multiple sine waves? How would you go about finding out which sine building blocks were used to create this wave?
 
 The tool that we'll use to decompose this wave into its components is the **Fourier Transform**. It will be able to take the composite wave from above and break it down to tell us exactly the frequencies and amplitudes of the individual sine waves that construct it!
+
+{{< admonition warning "Spoiler" false >}}
+This composite wave is just $\sin(x) + \sin(2x)$.
+{{< /admonition >}}
 
 ## The Series
 Before we can get to the Fourier transform, we must first discuss the **Fourier Series**. A Fourier series is a sum of sine and cosine functions that allows us to approximate any periodic function.
@@ -92,7 +96,7 @@ The solutions to these problems take the form
     f_n^{\cos}(x) = \cos\left(\frac{n\pi x}{\ell}\right) &\qquad \lambda_n = \frac{n^2\pi^2}{\ell^2} \text{ for } n\in\mathbb{Z}^+ \\\
     f_n^{\sin}(x) = \sin\left(\frac{n\pi x}{\ell}\right) &\qquad \lambda_n = \frac{n^2\pi^2}{\ell^2} \text{ for } n\in\mathbb{Z}^+
 \end{align*}
-and together they form an orthogonal set according to the $L^2$ inner product. The implication here is that they're all linearly independent, and as a result they can act as a basis for a space of periodic functions. Hence why we are using them as the terms in our Fourier series representation of a periodic function.
+and together they form an orthogonal set according to the $L^2$ inner product. The implication here is that they're all linearly independent, and furthermore they can serve as basis functions for a space of continuous functions on the interval $[-\ell,\ell]$. Hence why we are using them as the terms in our Fourier series representation of a periodic function on that interval.
 
 That's all the detail I'll go into here, but hopefully this is enough to point you in the right direction to learn more!
 {{< /admonition >}}
@@ -125,9 +129,9 @@ Note how each successive approximation gets closer and closer to the actual curv
 ## The Complex Fourier Series
 Before we move onto the idea of the Fourier transform, we must go over an alternate way of representing this series. Recall Euler's Formula:
 \\[ e^{i\theta} = \cos\theta + i\sin\theta \\]
-This affords us a conversion between our previous sine and cosine basis into a complex basis that still spans the space of periodic functions. In particular, we propose our new basis functions to be
+This affords us a conversion between our previous sine and cosine basis into a complex basis that still spans the the space of continuous functions over the interval $[-\ell,\ell]$. In particular, we propose our new basis functions to be
 \\[ f_n(x) = e^{i(n\pi x/\ell)} \quad \text{ for } n\in\mathbb{Z} \\]
-Not how each of these basis functions is just a complex linear combination of our old basis functions! We'll return to that in a moment, but first let's write down the complex fourier series using this basis:
+Note how each of these basis functions is just a complex linear combination of our old basis functions! We'll return to that in a moment, but first let's write down the complex fourier series using this basis:
 \\[ \hat{f}(x) = \sum_{n=-\infty}^{\infty} c_n e^{i(n\pi x/\ell)} \\]
 where
 \\[ c_n = \frac{1}{2\ell}\int_{-\ell}^\ell f(x)e^{-i(n\pi x/\ell)}\mathrm{d}x. \\]
@@ -137,7 +141,24 @@ Comparing this to our old definition, we can find the following relationships be
     c_n &= \frac{a_n-ib_n}{2} \\\
     c_{-n} &= \frac{a_n+ib_n}{2}
 \end{align*}
-This linear relationship further illustrates that this new basis indeed spans the space of periodic functions just as the old basis did.
+or equivalently:
+\begin{align*}
+    a_0 &= 2c_0 \\\
+    a_n &= c_n + c_{-n} \\\
+    b_n &= i(c_n - c_{-n})
+\end{align*}
+This linear conversion helps establish the intuition that our new basis functions span the same space of continuous functions as our sine and cosine basis. These functions can also be shown to be orthogonal according to the $L^2$ inner product. As a result, we can confidently say that the real and complex Fourier series are equivalent.
 
 ## The Fourier Transform
+Earlier we saw an example of how the partial sums of the Fourier series gave us closer and closer approximations for some function $f(x)$ that we attempted to represent with the series. This example worked for a bounded region $x\in[-\ell,\ell]$, but what if we didn't limit ourselves to that region? Can we extend the ideas we've seen so that they apply over an infinite interval?
 
+Indeed we can! The idea is to take the limit of the complex Fourier series as $\ell \to \infty$. You can look this up in more detail elsewhere but we end up defining the Fourier transform $\mathcal{F}$ of some function $f(x)$ at a point $\xi$ to be
+\\[ \boxed{\mathcal{F}\\{f\\} = \hat{f}(\xi) = \int_{-\infty}^\infty f(\xi)e^{-2\pi i\xi x} \mathrm{d}x} \\]
+as long as $f$ is absolutely integrable.
+
+## What's Next
+We now have the basic tools in our toolbelt to take steps towards understanding applications such as sound wave decomposition. In my next post we'll go over properties of the Fourier transform, discuss the discrete vs continuous transform, and examine how these are used to solve other problems.
+
+## Acknowledgements
+
+Thanks to Professor [Andrew Bernoff](https://www.math.hmc.edu/~ajb/) for teaching me most of this material in an intro partial differential equations class. This post is primarily based on my notes from that class as well as Prof. Bernoff as-of-yet unpublished PDEs textbook.
