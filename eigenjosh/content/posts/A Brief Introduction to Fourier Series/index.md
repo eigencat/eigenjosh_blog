@@ -11,7 +11,7 @@ linkToMarkdown: true
 draft: false
 ---
 
-In this post, we'll take the first step towards understanding the Fourier transform and its many applications. Note: if you're looking to really learn, go watch [3Blue1Brown's video](https://www.youtube.com/watch?v=spUNpyF58BY)! This post is really just an excuse for me to review the topic and make pretty graphs.
+In this post we'll take the first steps towards understanding the Fourier transform and its many applications. Note: if you're looking to really learn, go watch [3Blue1Brown's video](https://www.youtube.com/watch?v=spUNpyF58BY)! This post is really just an excuse for me to review the topic and make pretty graphs.
 
 <!--more-->
 
